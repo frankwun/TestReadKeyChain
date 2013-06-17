@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 
 #import "ViewController.h"
+#import "KeychainItemWrapper.h"
 
 @implementation AppDelegate
 
@@ -26,6 +27,12 @@
     self.viewController = [[[ViewController alloc] initWithNibName:@"ViewController" bundle:nil] autorelease];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
+    
+    KeychainItemWrapper *keyChain = [[KeychainItemWrapper alloc] initWithIdentifier:@"_test_write_keychain_" accessGroup:nil];
+    
+    id keychaindata = [keyChain objectForKey:(id)kSecAttrAccount];
+    NSLog(@"first keychaindata :%@, %@, %d", keychaindata, [keychaindata class], [(NSString *)keychaindata length]);
+    
     return YES;
 }
 
